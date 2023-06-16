@@ -43,6 +43,7 @@ app.get('/data',(req,res)=>{
     }
   </style>`
     list+=`<script>
+    alert('${arr[0]}님이 ${arr[4]}에 접속하셧네요.')
     document.addEventListener("DOMContentLoaded", () => {
       const bt = document.getElementById("ok");
       const modal = document.querySelector(".modal");
