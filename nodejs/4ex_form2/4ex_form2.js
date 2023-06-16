@@ -63,7 +63,7 @@ app.get('/data',(req,res)=>{
     for(let i =0;i<arr.length;i++){
         list+=`<p>${arr1[i]} = ${arr[i]}</p><br>`
     }
-    list+=`<img src="http://tfjs.site:7905/dog1.jpg"><br><button id="ok">팝업</button>`
+    list+=`<a href="index.html">홈으로</a><br><img src="http://tfjs.site:7905/dog1.jpg"><br><button id="ok">팝업</button>`
 res.send(list)
 })
 
