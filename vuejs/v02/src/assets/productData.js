@@ -2,13 +2,13 @@ export default [
   {
     product_name: '기계식 키보드',
     price: 25000,
-    category: '노트북/태블릿',
+    category: '악세서리',
     delivery_price: 5000
   },
   {
     product_name: '무선마우스',
     price: 12000,
-    category: '노트북/태블릿',
+    category: '악세서리',
     delivery_price: 3000
   },
   {
@@ -26,7 +26,7 @@ export default [
   {
     product_name: '블루투스 이어폰',
     price: 51000,
-    category: '노트북/태블릿',
+    category: '악세서리',
     delivery_price: 5000
   }
 ]
