@@ -38,7 +38,12 @@ table {
   text-align: center;
   margin: auto;
   border-collapse: collapse;
-  width: 400px;
+  width: 60%;
+  height: 300px;
+}
+td:hover {
+  background-color: black;
+  color: yellow;
 }
 tr:first-child {
   background-color: beige;
