@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>김정우</title>
+    <style>
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+      }
+      h1 {
+        color: yellow;
+        background-color: darkgray;
+        text-align: center;
+      }
+      h1:hover {
+        background-color: black;
+        color: blue;
+      }
+      form {
+        background: blanchedalmond;
+        width: 100%;
+        height: 80%;
+      }
+      form > div {
+        width: 100%;
+        height: 100%;
+        background-image: url(https://cdn.pixabay.com/photo/2023/05/04/12/57/landscape-7970076_1280.jpg);
+      }
+      div > span {
+        margin: 5px;
+        color: aliceblue;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>김정우 서버가 가동되고 있고 html이 서비스 중입니다.</h1>
+    <form action="data" method="post">
+      <!-- html로 가는것이 아닌 경로로 보냄 -->
+      <div>
+        <span>제목:</span
+        ><input
+          type="text"
+          name="name"
+          style="
+            width: 50%;
+            margin: 5px;
+            height: 10%;
+            background: none;
+            color: red;
+            font-size: medium;
+          "
+        /><br />
+        <span>내용:</span
+        ><textarea
+          name="content"
+          id=""
+          cols="30"
+          rows="10"
+          style="
+            width: 70%;
+            height: 50%;
+            margin: 5px;
+            background: none;
+            color: red;
+            font-size: medium;
+          "
+        ></textarea
+        ><br />
+        <span>남:</span><input type="radio" name="male" style="margin: 5px" />
+        <span>여:</span
+        ><input type="radio" name="female" style="margin: 5px" /> <br />
+        <span>날짜:</span
+        ><input
+          type="date"
+          name="date"
+          style="
+            margin: 5px;
+            width: 50%;
+            height: 10%;
+            background: none;
+            color: red;
+            font-size: medium;
+          "
+        />
+        <br />
+        <input type="reset" style="position: relative; top: 20%" />
+        <input type="submit" style="position: relative; top: 20%" />
+      </div>
+    </form>
+  </body>
+</html>
