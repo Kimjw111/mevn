@@ -4,6 +4,43 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <style>
+      #fileCss {
+        display: none;
+      }
+      label > div {
+        display: inline-block;
+        border-radius: 10px;
+        width: 40px;
+        height: 40px;
+        background-color: cornflowerblue;
+        color: white;
+        font-size: 2em;
+        text-align: center;
+      }
+      #fileSubmit {
+        border-radius: 5px;
+        border: 1px solid rgba(0, 0, 3, 0.3);
+        text-align: center;
+      }
+      #fileSubmit:hover {
+        background-color: black;
+        color: yellow;
+      }
+    </style>
+    <script>
+      /* 파일사이즈제한*/
+      function checkSize(input) {
+        const ss = 10 // MB
+        if (input.files[0].size > ss * 1024 * 1024) {
+          //10 MB의 사이즈
+          alert(`파일사이즈가 ${ss}MB를 넘습니다.`)
+          input.value = null
+        }
+        const name = document.getElementById('fname')
+        name.innerHTML = input.files[0].name
+      }
+    </script>
   </head>
   <body>
     <form action="/mkdir">
@@ -12,8 +49,10 @@
     </form>
     <hr />
     <form action="/up" method="post" enctype="multipart/form-data">
-      <input type="file" name="ufile" id="" />
-      <input type="submit" value="전송" />
+      <input type="file" name="ufile" id="fileCss" onchange="checkSize(this)" />
+      <label for="fileCss"><div>+</div></label>
+      <input type="submit" value="전송" id="fileSubmit" />
     </form>
+    <div id="fname">파일을 올려주세요.</div>
   </body>
 </html>
