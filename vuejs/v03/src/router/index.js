@@ -50,6 +50,39 @@ const routes = [
       import(
         /* webpackChunkName: "select",webpackPrefetch:true */ '../views/Select.vue'
       )
+  },
+  {
+    path: '/checkbox',
+    name: 'checkbox',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(
+        /* webpackChunkName: "checkbox",webpackPrefetch:true */ '../views/Checkbox.vue'
+      )
+  },
+  {
+    path: '/attribute',
+    name: 'attribute',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(
+        /* webpackChunkName: "attribute",webpackPrefetch:true */ '../views/Attribute.vue'
+      )
+  },
+  {
+    path: '/bindlist',
+    name: 'bindlist',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(
+        /* webpackChunkName: "bindlist",webpackPrefetch:true */ '../views/Bindlist.vue'
+      )
   }
 ]
 

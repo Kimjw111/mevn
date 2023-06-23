@@ -6,7 +6,7 @@
   </div>
 </template>
 <script></script>
-<style>
+<style scoped>
 img {
   width: 50%;
   height: 50%;
