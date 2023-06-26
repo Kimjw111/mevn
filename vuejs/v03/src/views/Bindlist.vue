@@ -22,20 +22,45 @@
         <th>수량</th>
         <th>합계</th>
       </tr>
-      <template v-for="item in dataArr" :key="item">
-        <tr>
-          <td>{{ item.number }}</td>
+      <template v-if="selData === '제주'">
+        <tr v-for="(item, i) in dataArr" :key="item">
+          <td>{{ i + 1 }}</td>
+          <td>{{ item.category }}</td>
+          <td>{{ item.product_name }}</td>
+          <td>{{ item.price }}</td>
+          <td>{{ item.delivery_price + 5000 }}</td>
+          <td>
+            <input type="number" placeholder="0" min="0" v-model="value[i]" />
+          </td>
+          <td v-if="value[i] === 0">0</td>
+          <td v-else>
+            {{
+              (total[i] = item.price * value[i] + item.delivery_price + 5000)
+            }}
+          </td>
+        </tr>
+      </template>
+      <template v-else>
+        <tr v-for="(item, i) in dataArr" :key="item">
+          <td>{{ i + 1 }}</td>
           <td>{{ item.category }}</td>
           <td>{{ item.product_name }}</td>
           <td>{{ item.price }}</td>
           <td>{{ item.delivery_price }}</td>
-          <td><input type="number" /></td>
-          <td></td>
+          <td>
+            <input type="number" placeholder="0" min="0" v-model="value[i]" />
+          </td>
+          <td v-if="value[i] === 0">0</td>
+          <td v-else>
+            {{ (total[i] = item.price * value[i] + item.delivery_price) }}
+          </td>
         </tr>
       </template>
+      <!-- <td>{{ selData==='제주'?item.delivery_price + 5000:item.delivery_price }}</td> 내용에 삼항연산자로 쓸수도 있음 -->
+      <!-- value[i]>0?(true):(false) -->
       <tr>
-        <td colspan="6">총합</td>
-        <td>0</td>
+        <td colspan="6" id="sum">총합</td>
+        <td>{{ total.reduce((a, c) => a + c, 0) }}</td>
       </tr>
     </table>
   </div>
@@ -45,7 +70,9 @@ import data from '../assets/productData.js'
 export default {
   data() {
     return {
+      value: [0, 0, 0, 0, 0],
       dataArr: data,
+      total: [],
       selData: '',
       obj: {
         부산: '부산',
@@ -80,7 +107,7 @@ td {
 td > input {
   border: none;
 }
-tr:last-child {
+#sum {
   background-color: rgb(250, 214, 55);
 }
 </style>
