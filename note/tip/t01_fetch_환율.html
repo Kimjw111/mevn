@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>환율 계산기</title>
+  </head>
+  <body>
+    <h1>환율 계산기</h1>
+    <div id="exchangeRate"></div>
+    <input type="number" id="amountInput" placeholder="금액을 입력하세요" />
+    <button onclick="calculateExchange()">계산</button>
+
+    <script>
+      const url =
+        'https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWUSD'
+
+      function calculateExchange() {
+        const amount = document.getElementById('amountInput').value
+        fetch(url)
+          .then((res) => res.json())
+          .then((data) => {
+            const exchangeRate = data[0].basePrice
+            const result = amount * exchangeRate
+            document.getElementById('exchangeRate').innerText =
+              '환율: ' +
+              exchangeRate.toLocaleString('ko-KR') +
+              '원' +
+              ' / 결과: ' +
+              result.toLocaleString('ko-KR') +
+              '원'
+          })
+          .catch((error) => {
+            console.error('Error:', error)
+          })
+      }
+    </script>
+  </body>
+</html>
