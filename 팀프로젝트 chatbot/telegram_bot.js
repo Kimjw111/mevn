@@ -225,23 +225,33 @@ bot.onText(/^명령어/, (msg, match) => {
 })
 
 // 영화 실시간 순위 네이버 크로울링
-bot.onText(/^영화/, (msg, match) => {
+/* 영화순위 보여주기 */
+const movieURL =
+  'https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=0&ie=utf8&query=%EC%98%81%ED%99%94%EC%88%9C%EC%9C%84'
+
+bot.onText(/^영화$/, async (msg) => {
   const chatId = msg.chat.id
-  const url =
-    'https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=0&ie=utf8&query=%EC%98%81%ED%99%94%EC%88%9C%EC%9C%84'
-  axios.get(url).then((res) => {
-    const $ = cheerio.load(res.data)
-    const movie = []
-    $('.title_box').each(function () {
-      movie.push($(this).text())
-    })
-    const resp = []
-    movie.forEach((v, i) => {
-      resp.push(`${i + 1}위 : ${v}`)
-    })
-    bot.sendMessage(chatId, JSON.stringify(resp))
-  })
+
+  try {
+    const response = await axios.get(movieURL)
+    const $ = cheerio.load(response.data)
+
+    const movieList = $('.title_box')
+      .slice(0, 10)
+      .map((index, element) => {
+        return `${index + 1}위: ${$(element).text().trim()}`
+      })
+      .get()
+
+    const movieMessage = `영화 순위:\n\n${movieList.join('\n')}`
+    bot.sendMessage(chatId, movieMessage)
+  } catch (error) {
+    console.error(error)
+    bot.sendMessage(chatId, '영화 순위를 가져오는 중에 오류가 발생했습니다.')
+  }
 })
+
+// 사진 쿼리 형식으로
 bot.onText(/^사진/, (msg, match) => {
   const chatId = msg.chat.id
   const resp =
