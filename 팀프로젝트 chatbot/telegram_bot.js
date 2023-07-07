@@ -214,6 +214,16 @@ bot.onText(/^안녕/, (msg, match) => {
   bot.sendMessage(chatId, resp)
 })
 
+//명령어
+bot.onText(/^명령어/, (msg, match) => {
+  const chatId = msg.chat.id
+  //   const resp = match.input //메아리
+  const resp =
+    '최근대화+숫자, 수정+_id+수정내용, 삭제+_id, 모두삭제, 로또, 영화, 사진, 알림+시간+분+알림내용,위치(모바일에서만 됨)'
+  console.log(resp)
+  bot.sendMessage(chatId, resp)
+})
+
 // 영화 실시간 순위 네이버 크로울링
 bot.onText(/^영화/, (msg, match) => {
   const chatId = msg.chat.id
