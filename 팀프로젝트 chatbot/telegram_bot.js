@@ -143,26 +143,6 @@ function getLottoWinningNumbers() {
     })
 }
 
-// Function to generate random lottery numbers
-function generateRandomNumbers(count, maxNumber) {
-  const numbers = []
-  while (numbers.length < count) {
-    const randomNumber = Math.floor(Math.random() * maxNumber) + 1
-    if (!numbers.includes(randomNumber)) {
-      numbers.push(randomNumber)
-    }
-  }
-  return numbers
-}
-
-// Function to recommend lottery numbers
-function recommendLotteryNumbers() {
-  const maxNumberCount = 6 // The count of numbers to be recommended
-  const maxNumberValue = 45 // The maximum value for the lottery numbers
-
-  return generateRandomNumbers(maxNumberCount, maxNumberValue)
-}
-
 // Lotto command to get winning numbers or recommended numbers
 bot.onText(/^로또$/, (msg) => {
   const chatId = msg.chat.id
@@ -196,12 +176,46 @@ bot.onText(/^당첨 번호 가져오기$/, (msg) => {
   })
 })
 
+// Function to generate random lottery numbers
+function generateRandomNumbers(count, maxNumber) {
+  const numbers = []
+  while (numbers.length < count) {
+    const randomNumber = Math.floor(Math.random() * maxNumber) + 1
+    if (!numbers.includes(randomNumber)) {
+      numbers.push(randomNumber)
+    }
+  }
+  return numbers
+}
+
+// Function to recommend multiple sets of lottery numbers
+function recommendLotteryNumbers(setCount, numberCount) {
+  const maxNumberCount = 6 // The count of numbers to be recommended
+  const maxNumberValue = 45 // The maximum value for the lottery numbers
+
+  const recommendedSets = []
+  for (let i = 0; i < setCount; i++) {
+    const recommendedNumbers = generateRandomNumbers(
+      numberCount,
+      maxNumberValue
+    )
+    recommendedSets.push(recommendedNumbers)
+  }
+  return recommendedSets
+}
+
 // Command to recommend lottery numbers
 bot.onText(/^추천 번호 추천하기$/, (msg) => {
   const chatId = msg.chat.id
 
-  const recommendedNumbers = recommendLotteryNumbers()
-  const resp = '추천 로또 번호: ' + recommendedNumbers.join(', ')
+  const setCount = 2 // Number of sets to recommend
+  const numberCount = 6 // Number of numbers in each set
+
+  const recommendedSets = recommendLotteryNumbers(setCount, numberCount)
+  let resp = ''
+  for (const recommendedNumbers of recommendedSets) {
+    resp += '추천 로또 번호: ' + recommendedNumbers.join(', ') + '\n'
+  }
   bot.sendMessage(chatId, resp)
 })
 
